@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; //TODO move to it's own script
 
 public class Player : MonoBehaviour
 {
@@ -16,7 +17,8 @@ public class Player : MonoBehaviour
     //Cached component refernces
     Rigidbody2D myRigidbody;
     Animator myAnimator;
-    Collider2D myCollider2D;
+    CapsuleCollider2D myColliderBody;
+    BoxCollider2D myColliderFeet;
 
     float gravityAtStart;
 
@@ -25,7 +27,8 @@ public class Player : MonoBehaviour
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
-        myCollider2D = GetComponent<Collider2D>();
+        myColliderBody = GetComponent<CapsuleCollider2D>();
+        myColliderFeet = GetComponent<BoxCollider2D>();
 
         gravityAtStart = myRigidbody.gravityScale;
     }
@@ -34,9 +37,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         Walk();
+        FlipSprite();
         Jump();
         Climb();
-        FlipSprite();
+        WaterDeath(); //TODO change
+        
     }
 
 
@@ -49,53 +54,6 @@ public class Player : MonoBehaviour
         
     }
 
-    void Jump()
-    {
-        if(!myCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground")))
-        {
-            myAnimator.SetBool("Jumping", false);
-            return;
-        }
-        else
-        {
-            if (Input.GetButtonDown("Jump"))
-            {
-                //Change Animation State
-
-                Vector2 jumpVelocity = new Vector2(0f, jumpSpeed);
-                myRigidbody.velocity += jumpVelocity;
-                myAnimator.SetBool("Jumping", true);
-            }
-        }
-
-        
-
-    }
-
-    void Climb()
-    {
-        if (!myCollider2D.IsTouchingLayers(LayerMask.GetMask("Ladder")))
-        {
-            myAnimator.SetBool("Climbing", false);
-            myRigidbody.gravityScale = gravityAtStart;
-            return;
-        }
-        else
-        {
-            myAnimator.SetBool("Climbing", true);
-        }
-
-        myRigidbody.gravityScale = 0f;
-
-        float controlThrow = Input.GetAxis("Vertical");
-        Vector2 climbVelocity = new Vector2(myRigidbody.velocity.x, controlThrow * climbSpeed);
-        myRigidbody.velocity = climbVelocity;
-
-        //bool playerHasVerticalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
-        //myAnimator.SetBool("Climbing", playerHasVerticalSpeed);
-
-    }
-
     void FlipSprite()
     {
         //Check input for horizontal motion
@@ -105,6 +63,57 @@ public class Player : MonoBehaviour
         if (playerHasHorizontalSpeed)
         {
             transform.localScale = new Vector2(Mathf.Sign(myRigidbody.velocity.x), 1);
+        }
+    }
+
+    void Jump()
+    {
+        if(!myColliderFeet.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        {
+            myAnimator.SetBool("Jumping", true);
+            return;
+        }
+        else
+        {
+            myAnimator.SetBool("Jumping", false);
+        }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            //Change Animation State
+
+            Vector2 jumpVelocity = new Vector2(0f, jumpSpeed);
+            myRigidbody.velocity += jumpVelocity;
+        }
+
+    }
+
+    void Climb()
+    {
+        if (!myColliderFeet.IsTouchingLayers(LayerMask.GetMask("Ladder")))
+        {
+            myAnimator.SetBool("Climbing", false);
+            myRigidbody.gravityScale = gravityAtStart;
+            return;
+        }
+
+        myRigidbody.gravityScale = 0f;
+
+        float controlThrow = Input.GetAxis("Vertical");
+        Vector2 climbVelocity = new Vector2(myRigidbody.velocity.x, controlThrow * climbSpeed);
+        myRigidbody.velocity = climbVelocity;
+
+        //bool playerHasVerticalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
+        myAnimator.SetBool("Jumping", false);
+        myAnimator.SetBool("Climbing", true);
+
+    }
+
+    void WaterDeath() //TODO change
+    {
+        if (myColliderFeet.IsTouchingLayers(LayerMask.GetMask("Water")))
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }
