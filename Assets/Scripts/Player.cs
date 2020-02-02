@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] float movementSpeed = 5f;
     [SerializeField] float jumpSpeed = 6f;
     [SerializeField] float climbSpeed = 2f;
+    [SerializeField] int health = 3;
 
 
     //State
@@ -36,14 +37,18 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isAlive)
+        {
+            return;
+        }
         Walk();
         FlipSprite();
         Jump();
         Climb();
+        TakeDamage();
         WaterDeath(); //TODO change
         
     }
-
 
     void Walk()
     {
@@ -107,6 +112,25 @@ public class Player : MonoBehaviour
         myAnimator.SetBool("Jumping", false);
         myAnimator.SetBool("Climbing", true);
 
+    }
+
+    void TakeDamage()
+    {
+
+        if (myColliderBody.IsTouchingLayers(LayerMask.GetMask("Enemy")))
+        {
+            if (health >= 1)
+            {
+                myAnimator.SetTrigger("Damage");
+                health--;
+            }
+            else
+            {
+                //SceneManager.LoadScene(0);
+                return;
+            }
+            
+        }
     }
 
     void WaterDeath() //TODO change
