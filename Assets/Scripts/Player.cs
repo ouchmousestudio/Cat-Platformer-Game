@@ -137,7 +137,7 @@ public class Player : MonoBehaviour
     {
         if (myColliderFeet.IsTouchingLayers(LayerMask.GetMask("Water")))
         {
-            SceneManager.LoadScene(0);
+            FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
     }
 }
