@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3836775177969799750}
   - component: {fileID: 3836775177969799751}
+  - component: {fileID: 3836775177969799753}
   - component: {fileID: 3836775177969799748}
   - component: {fileID: 3836775177969799749}
   - component: {fileID: 3836775177969799746}
-  - component: {fileID: 3836775177969799753}
   - component: {fileID: 3836775177969799752}
   m_Layer: 12
   m_Name: Mouse
@@ -87,6 +87,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3836775177969799753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3836775177969799747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bfce1ffc44424b308ff31878f8d3dd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 1
+  splatterParticles: {fileID: 3175535758834852074, guid: cc1c19ab0b7014b0ca5615ee49435b3d,
+    type: 3}
+  dyingTime: 0.5
 --- !u!70 &3836775177969799748
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -143,19 +159,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3836775177969799753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3836775177969799747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bfce1ffc44424b308ff31878f8d3dd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 1
 --- !u!61 &3836775177969799752
 BoxCollider2D:
   m_ObjectHideFlags: 0

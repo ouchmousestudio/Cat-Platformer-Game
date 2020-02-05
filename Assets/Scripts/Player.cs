@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] float jumpSpeed = 6f;
     [SerializeField] float climbSpeed = 2f;
     [SerializeField] int health = 3;
+    [SerializeField] float damageDelay = 2f;
 
 
     //State
@@ -45,7 +46,6 @@ public class Player : MonoBehaviour
         FlipSprite();
         Jump();
         Climb();
-        TakeDamage();
         WaterDeath(); //TODO change
         
     }
@@ -114,29 +114,31 @@ public class Player : MonoBehaviour
 
     }
 
-    void TakeDamage()
+    public void TakeDamage()
     {
-
-        if (myColliderBody.IsTouchingLayers(LayerMask.GetMask("Enemy")))
+        if (health >= 1)
         {
-            if (health >= 1)
-            {
-                myAnimator.SetTrigger("Damage");
-                health--;
-            }
-            else
-            {
-                //SceneManager.LoadScene(0);
-                return;
-            }
-            
+            StartCoroutine(ProcessDamage());
         }
+        else
+        {
+            FindObjectOfType<MusicPlayer>().DeathMeow();
+            FindObjectOfType<GameSession>().ProcessPlayerDeath();
+        }
+    }
+
+    IEnumerator ProcessDamage()
+    {
+        yield return new WaitForSecondsRealtime(damageDelay);
+        myAnimator.SetTrigger("Damage");
+        health--;
     }
 
     void WaterDeath() //TODO change
     {
         if (myColliderFeet.IsTouchingLayers(LayerMask.GetMask("Water")))
         {
+            FindObjectOfType<MusicPlayer>().DeathMeow();
             FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
     }
