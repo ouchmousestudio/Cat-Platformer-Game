@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MusicPlayer : MonoBehaviour
-{
-    [SerializeField] AudioClip deathMeow;
-    [SerializeField] AudioClip happyMeow;
-    [SerializeField] AudioClip deathSqueak;
+{ 
 
     AudioSource myAudioSource;
 
     private void Start()
     {
         myAudioSource = GetComponent<AudioSource>();
+        
     }
+    //Singleton
     private void Awake()
     {
         int musicPlayers = FindObjectsOfType<MusicPlayer>().Length;
@@ -26,19 +25,8 @@ public class MusicPlayer : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-    public void DeathMeow()
+    public void SetVolume(float volume)
     {
-        myAudioSource.PlayOneShot(deathMeow);
+        myAudioSource.volume = volume;
     }
-
-    public void HappyMeow()
-    {
-        myAudioSource.PlayOneShot(happyMeow);
-    }
-
-    public void DeathSqueak()
-    {
-        myAudioSource.PlayOneShot(deathSqueak);
-    }
-
 }

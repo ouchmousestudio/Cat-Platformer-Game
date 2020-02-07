@@ -51,8 +51,8 @@ public class EnemyMovement : MonoBehaviour
                 Destroy(gameObject, dyingTime);
                 movementSpeed = 0;
                 myAnimator.SetBool("IsDead", true);
-                FindObjectOfType<MusicPlayer>().DeathSqueak();
-                Instantiate(splatterParticles, transform.position, Quaternion.identity);
+                FindObjectOfType<SFXPlayer>().DeathSqueak();
+                //Instantiate(splatterParticles, transform.position, Quaternion.identity);
                 enemyIsAlive = false;
             }
             

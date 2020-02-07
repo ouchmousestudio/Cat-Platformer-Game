@@ -122,7 +122,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            FindObjectOfType<MusicPlayer>().DeathMeow();
+            FindObjectOfType<SFXPlayer>().DeathMeow();
             FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
     }
@@ -138,7 +138,7 @@ public class Player : MonoBehaviour
     {
         if (myColliderFeet.IsTouchingLayers(LayerMask.GetMask("Water")))
         {
-            FindObjectOfType<MusicPlayer>().DeathMeow();
+            FindObjectOfType<SFXPlayer>().DeathMeow();
             FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
     }
