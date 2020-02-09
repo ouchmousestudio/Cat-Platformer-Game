@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Doorway : MonoBehaviour
     
 {
-    [SerializeField] float levelLoadDelay = 2f;
+    [SerializeField] float levelLoadDelay = 1f;
     [SerializeField] GameObject gameObject;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -19,8 +19,9 @@ public class Doorway : MonoBehaviour
     IEnumerator LoadNextLevel()
     {
         yield return new WaitForSecondsRealtime(levelLoadDelay);
-        int currentScene = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentScene + 1);
-           
+        //int currentScene = SceneManager.GetActiveScene().buildIndex;
+        //SceneManager.LoadScene(currentScene + 1);
+        SceneManager.LoadScene("World Map");
+
     }
 }
