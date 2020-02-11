@@ -7,7 +7,7 @@ public class Menu : MonoBehaviour
 {
     public void StartFirstLevel()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("World Map");
     }
     public void GoToSettings()
     {
@@ -19,6 +19,6 @@ public class Menu : MonoBehaviour
     }
     public void MainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Main Menu");
     }
 }

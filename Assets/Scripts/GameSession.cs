@@ -8,6 +8,12 @@ public class GameSession : MonoBehaviour
 {
 
     [SerializeField] int playerLives = 3;
+
+    public int levelNumber = 0;
+    public int score = 0;
+
+    public Vector2 lastLocation;
+
     //Singleton
     private void Awake()
     {
@@ -21,11 +27,6 @@ public class GameSession : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     public void ProcessPlayerDeath()
     {
@@ -37,6 +38,11 @@ public class GameSession : MonoBehaviour
         {
             ResetGame();
         }
+    }
+
+    public void AddToScore()
+    {
+        score += 10;
     }
 
     private void RemoveLife()
@@ -52,4 +58,12 @@ public class GameSession : MonoBehaviour
         SceneManager.LoadScene(0);
         Destroy(gameObject);
     }
+
+    //Keep Level Progress
+    public int ProgressLevel(int levelProgress)
+    {
+        levelNumber = levelProgress;
+        return levelProgress;
+    }
+
 }

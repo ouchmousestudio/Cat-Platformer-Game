@@ -14,7 +14,9 @@ public class Coin : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         Destroy(gameObject, 0.1f);
+        FindObjectOfType<GameSession>().AddToScore();
         FindObjectOfType<SFXPlayer>().HappyMeow();
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; //TODO move to it's own script
 
 public class Player : MonoBehaviour
 {
@@ -10,7 +9,11 @@ public class Player : MonoBehaviour
     [SerializeField] float jumpSpeed = 6f;
     [SerializeField] float climbSpeed = 2f;
     [SerializeField] int health = 3;
-    [SerializeField] float damageDelay = 2f;
+    [SerializeField] float damageDelay = 1f;
+    [SerializeField] float knockback = 5f;
+    public float knockbackLength = 0.2f;
+    public float knockbackCount = 0f;
+    public bool knockbackFromRight;
 
 
     //State
@@ -42,10 +45,23 @@ public class Player : MonoBehaviour
         {
             return;
         }
-        Walk();
-        FlipSprite();
-        Jump();
-        Climb();
+        if (knockbackCount <= 0)
+        {
+            Jump();
+            Climb();
+            Walk();
+            FlipSprite();
+        }
+        else
+        {
+            myAnimator.SetTrigger("Damage");
+            if (knockbackFromRight)
+                myRigidbody.velocity = new Vector2(-knockback, knockback);
+            if (!knockbackFromRight)
+                myRigidbody.velocity = new Vector2(knockback, knockback);
+            knockbackCount -= Time.deltaTime;
+        }
+
         WaterDeath(); //TODO change
         
     }
@@ -130,7 +146,6 @@ public class Player : MonoBehaviour
     IEnumerator ProcessDamage()
     {
         yield return new WaitForSecondsRealtime(damageDelay);
-        myAnimator.SetTrigger("Damage");
         health--;
     }
 
@@ -141,5 +156,13 @@ public class Player : MonoBehaviour
             FindObjectOfType<SFXPlayer>().DeathMeow();
             FindObjectOfType<GameSession>().ProcessPlayerDeath();
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (transform.position.x < collision.transform.position.x)
+            knockbackFromRight = true;
+        else
+            knockbackFromRight = false;
     }
 }

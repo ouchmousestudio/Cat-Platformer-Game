@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class LevelIcon : MonoBehaviour
 {
 
     [SerializeField] string sceneName;
+    [SerializeField] int thisLevel;
+    [SerializeField] TextMeshProUGUI levelText;
 
     Collider2D myCollider;
     private void Start()
@@ -22,16 +25,30 @@ public class LevelIcon : MonoBehaviour
     {
         if (myCollider.IsTouchingLayers(LayerMask.GetMask("Player")))
         {
-            if (Input.GetButtonDown("Jump"))
+            levelText.text = sceneName;
+
+            if (thisLevel <= FindObjectOfType<GameSession>().levelNumber)
             {
-                SceneManager.LoadScene(sceneName);
+                levelText.text = sceneName;
+                levelText.color = new Color32(255, 255, 255, 200);
+
+                //Show Level Text
+                if (Input.GetButtonDown("Jump"))
+                {
+                    SceneManager.LoadScene(sceneName);
+                }
+            }
+            else
+            {
+                levelText.color = new Color32(255, 255, 255, 50);
             }
         }
         else
         {
-            return;
+            levelText.text = null;
         }
 
     }
+
 
 }

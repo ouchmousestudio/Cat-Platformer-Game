@@ -1045,10 +1045,11 @@ MonoBehaviour:
   jumpSpeed: 12
   climbSpeed: 2
   health: 3
-  damageDelay: 2
-  musicPlayer: {fileID: 4426754752578993865, guid: 0a7944013829844c7913b272b5446293,
-    type: 3}
-  deathMeow: {fileID: 8300000, guid: 56b802fc2f95e44e7b6938e63b6aa40e, type: 3}
+  damageDelay: 1
+  knockback: 5
+  knockbackLength: 0.2
+  knockbackCount: 0
+  knockbackFromRight: 1
 --- !u!82 &-423327575147981624
 AudioSource:
   m_ObjectHideFlags: 0

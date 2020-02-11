@@ -4,27 +4,46 @@ using UnityEngine;
 
 public class Parallax : MonoBehaviour
 {
+    //Backgrounds
+    public Transform[] backgrounds;
+    private float[] parallaxScales;
 
-    float length, startPos;
-    public GameObject camera;
-    public float parallaxAmount;
+    public float smoothing = 1f;
+
+    private Transform cam;
+    private Vector3 previousCamPos;
+
+    private void Awake()
+    {
+        cam = Camera.main.transform;
+    }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        startPos = transform.position.x;
-        length = GetComponent<SpriteRenderer>().bounds.size.x;
+        previousCamPos = cam.position;
+
+        //Assign amount based on Z position
+        parallaxScales = new float[backgrounds.Length];
+        for (int i = 0; i < backgrounds.Length; i++)
+        {
+            parallaxScales[i] = backgrounds[i].position.z * -1;
+        }
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        float temp = camera.transform.position.x * (1 - parallaxAmount);
-        float distance = camera.transform.position.x * parallaxAmount;
-
-        transform.position = new Vector2(startPos + distance, transform.position.y);
-
-        if (temp > startPos + length) startPos += length;
-        else if (temp < startPos + length) startPos -= length; 
+        // for each background
+        for (int i = 0; i < backgrounds.Length; i++)
+        {
+            float parallax = (previousCamPos.x - cam.position.x) * parallaxScales[i];
+            float backgroundTargetPosX = backgrounds[i].position.x + parallax;
+            Vector3 backgroundTargetPos = new Vector3(backgroundTargetPosX, backgrounds[i].position.y, backgrounds[i].position.z);
+            // fade between current position and the target position using lerp
+            backgrounds[i].position = Vector3.Lerp(backgrounds[i].position, backgroundTargetPos, smoothing * Time.deltaTime);
+        }
+        // set the previousCamPos to the camera's position at the end of the frame
+        previousCamPos = cam.position;
     }
 }
+

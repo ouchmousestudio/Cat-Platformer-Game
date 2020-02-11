@@ -8,6 +8,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float movementSpeed = 1f;
     [SerializeField] GameObject splatterParticles;
     [SerializeField] float dyingTime = 0.5f;
+    [SerializeField] GameObject player;
 
     Rigidbody2D myRigidbody;
     CapsuleCollider2D myColliderMid;
@@ -25,27 +26,27 @@ public class EnemyMovement : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         myColliderSides = GetComponent<BoxCollider2D>();
         myColliderMid = GetComponent<CapsuleCollider2D>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if(isFacingLeft())
+        if (isFacingLeft())
         {
             myRigidbody.velocity = new Vector2(-movementSpeed, 0f);
-        }
+                    }   
         else
         {
             myRigidbody.velocity = new Vector2(movementSpeed, 0f);
         }
+            
 
         if (myColliderMid.IsTouchingLayers(LayerMask.GetMask("Player")))
         {
             if (!enemyIsAlive)
-            {
                 return;
-            }
             else
             {
                 Destroy(gameObject, dyingTime);
@@ -60,6 +61,7 @@ public class EnemyMovement : MonoBehaviour
         else if (myColliderSides.IsTouchingLayers(LayerMask.GetMask("Player")))
         {
             FindObjectOfType<Player>().TakeDamage();
+            FindObjectOfType<Player>().knockbackCount = FindObjectOfType<Player>().knockbackLength;
         }
 
     }

@@ -103,6 +103,7 @@ MonoBehaviour:
   splatterParticles: {fileID: 3175535758834852074, guid: cc1c19ab0b7014b0ca5615ee49435b3d,
     type: 3}
   dyingTime: 0.5
+  player: {fileID: 9203353957944293120, guid: d4d4e050f980b4ac195e5d90cf4c0d83, type: 3}
 --- !u!70 &3836775177969799748
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -172,7 +173,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.4522872, y: -0.19831973}
+  m_Offset: {x: -0.4522872, y: -0.095068276}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -183,5 +184,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.0762949, y: 0.26893294}
+  m_Size: {x: 0.0762949, y: 0.47543585}
   m_EdgeRadius: 0
