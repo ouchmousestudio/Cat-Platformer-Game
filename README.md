@@ -10,5 +10,5 @@ This is a simple platformer game made in Unity utilizing various scripts for mov
 
 
 ## Credits
-Made by Miles Fearnall-Williams
-Music, level and character design - Miles
+* Game made by Miles Fearnall-Williams
+* Music, level and character design - Miles
