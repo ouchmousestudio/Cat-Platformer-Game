@@ -12,6 +12,7 @@ public class LevelIcon : MonoBehaviour
     [SerializeField] TextMeshProUGUI levelText;
 
     Collider2D myCollider;
+
     private void Start()
     {
         myCollider = GetComponent<Collider2D>();
@@ -35,7 +36,9 @@ public class LevelIcon : MonoBehaviour
                 //Show Level Text
                 if (Input.GetButtonDown("Jump"))
                 {
-                    SceneManager.LoadScene(sceneName);
+                    //SceneManager.LoadScene(sceneName);
+                    FindObjectOfType<Dissolve>().DissolveOut();
+                    StartCoroutine(DissolveToLevel());
                 }
             }
             else
@@ -47,6 +50,12 @@ public class LevelIcon : MonoBehaviour
         {
             levelText.text = null;
         }
+
+    }
+    IEnumerator DissolveToLevel()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        SceneManager.LoadScene(sceneName);
 
     }
 

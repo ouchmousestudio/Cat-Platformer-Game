@@ -10,24 +10,28 @@ public class WorldMap : MonoBehaviour
 
     Rigidbody2D myRigidbody;
 
+    [SerializeField] Transform movePoint;
+
+    [SerializeField] LayerMask obstacle;
+
 
     // Start is called before the first frame update
     private void Start()
     {
+        
+
         //Reset player position
         int levelNumber = FindObjectOfType<GameSession>().levelNumber;
-        //if (levelNumber >= 1)
-        //{
-        //    levelNumber -= 1;
-        //}
 
-        //Vector2 offsetPos = new Vector2(level[levelNumber].transform.position.x, level[levelNumber].transform.position.y + 0.25f);
-        //gameObject.transform.position = offsetPos;
 
         if (levelNumber > 0)
         {
             gameObject.transform.position = FindObjectOfType<GameSession>().lastLocation;
+            movePoint.position = FindObjectOfType<GameSession>().lastLocation;
         }
+
+        //Unparent the movepoint
+        movePoint.parent = null;
 
         myRigidbody = GetComponent<Rigidbody2D>();
     }
@@ -36,37 +40,50 @@ public class WorldMap : MonoBehaviour
     void Update()
     {
         Movement();
+
     }
 
     void Movement()
     {
-        //if (Input.GetKeyDown("up"))
-        //{
-        //    gameObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 0.5f);
-        //}
-        //else if (Input.GetKeyDown("down"))
-        //{
-        //    gameObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.5f);
-        //}
-        //else if (Input.GetKeyDown("left"))
-        //{
-        //    gameObject.transform.position = new Vector2(gameObject.transform.position.x - 0.5f, gameObject.transform.position.y);
-        //}
-        //else if (Input.GetKeyDown("right"))
-        //{
-        //    gameObject.transform.position = new Vector2(gameObject.transform.position.x + 0.5f, gameObject.transform.position.y);
-        //}
-        float xMove = Input.GetAxis("Horizontal");
-        float yMove = Input.GetAxis("Vertical");
-        Vector2 playerVelocity = new Vector2(xMove * movementSpeed, yMove * movementSpeed);
-        myRigidbody.velocity = playerVelocity;
+        //Smooth movement type
+        //float xMove = Input.GetAxis("Horizontal");
+        //float yMove = Input.GetAxis("Vertical");
+        //Vector2 playerVelocity = new Vector2(xMove * movementSpeed, yMove * movementSpeed);
+        //myRigidbody.velocity = playerVelocity;
+
+
+
+        //Input by steps
+        transform.position = Vector3.MoveTowards(transform.position, movePoint.position, movementSpeed * Time.deltaTime);
+
+        if (Vector3.Distance(transform.position, movePoint.position) <= 0.05f)
+        {
+            if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
+            {
+                if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), 0.2f, obstacle))
+                {
+                    movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
+                }
+            }
+            if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
+            {
+                if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f), 0.2f, obstacle))
+                {
+                    movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f);
+                }
+            }
+        }
 
         if (Input.GetButtonDown("Jump"))
         {
             FindObjectOfType<GameSession>().lastLocation = gameObject.transform.position;
 
         }
+
+
+
     }
+
 
 }
 

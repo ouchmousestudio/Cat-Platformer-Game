@@ -22,8 +22,9 @@ public class Player : MonoBehaviour
     //Cached component refernces
     Rigidbody2D myRigidbody;
     Animator myAnimator;
-    CapsuleCollider2D myColliderBody;
+    CapsuleCollider2D myColliderBody; //Unused
     BoxCollider2D myColliderFeet;
+
 
     float gravityAtStart;
 
@@ -36,6 +37,10 @@ public class Player : MonoBehaviour
         myColliderFeet = GetComponent<BoxCollider2D>();
 
         gravityAtStart = myRigidbody.gravityScale;
+
+        //Dissolve at start of level
+        FindObjectOfType<Dissolve>().DissolveIn();
+
     }
 
     // Update is called once per frame
@@ -51,6 +56,8 @@ public class Player : MonoBehaviour
             Climb();
             Walk();
             FlipSprite();
+            WaterDeath(); //TODO change
+
         }
         else
         {
@@ -61,9 +68,6 @@ public class Player : MonoBehaviour
                 myRigidbody.velocity = new Vector2(knockback, knockback);
             knockbackCount -= Time.deltaTime;
         }
-
-        WaterDeath(); //TODO change
-        
     }
 
     void Walk()
@@ -132,14 +136,18 @@ public class Player : MonoBehaviour
 
     public void TakeDamage()
     {
+        if(!isAlive)
+        { return; }
         if (health >= 1)
         {
             StartCoroutine(ProcessDamage());
         }
         else
         {
+            FindObjectOfType<Dissolve>().DissolveOut();
+            isAlive = false;
             FindObjectOfType<SFXPlayer>().DeathMeow();
-            FindObjectOfType<GameSession>().ProcessPlayerDeath();
+            StartCoroutine(DeathAnimation());
         }
     }
 
@@ -149,12 +157,23 @@ public class Player : MonoBehaviour
         health--;
     }
 
+    IEnumerator DeathAnimation()
+    {
+
+        yield return new WaitForSecondsRealtime(0.5f);
+
+        FindObjectOfType<GameSession>().ProcessPlayerDeath();
+    }
+
     void WaterDeath() //TODO change
     {
         if (myColliderFeet.IsTouchingLayers(LayerMask.GetMask("Water")))
         {
+            FindObjectOfType<Dissolve>().DissolveOut();
+            isAlive = false;
             FindObjectOfType<SFXPlayer>().DeathMeow();
-            FindObjectOfType<GameSession>().ProcessPlayerDeath();
+            StartCoroutine(DeathAnimation());
+
         }
     }
 
@@ -165,4 +184,5 @@ public class Player : MonoBehaviour
         else
             knockbackFromRight = false;
     }
+
 }

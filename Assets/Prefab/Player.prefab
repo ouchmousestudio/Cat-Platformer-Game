@@ -869,10 +869,10 @@ GameObject:
   - component: {fileID: 9203353957944293125}
   - component: {fileID: 9203353957944293126}
   - component: {fileID: 9203353957944293127}
+  - component: {fileID: 1747611433}
   - component: {fileID: 9203353957944293131}
   - component: {fileID: 9203353957944293124}
   - component: {fileID: 1747611434}
-  - component: {fileID: 1747611433}
   - component: {fileID: -423327575147981624}
   m_Layer: 10
   m_Name: Player
@@ -933,7 +933,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 43146c788c45e40eea8e30d344672eb8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -966,6 +966,29 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1747611433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9203353957944293120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68efd6b4b0a45403e8f5a9f145fb7da2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 4
+  jumpSpeed: 12
+  climbSpeed: 2
+  health: 3
+  damageDelay: 1
+  knockback: 5
+  knockbackLength: 0.2
+  knockbackCount: 0
+  knockbackFromRight: 1
+  myMaterial: {fileID: 2100000, guid: 43146c788c45e40eea8e30d344672eb8, type: 2}
+  dissolveSpeed: 1
 --- !u!50 &9203353957944293131
 Rigidbody2D:
   serializedVersion: 4
@@ -1029,27 +1052,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6389899, y: 0.22084069}
   m_EdgeRadius: 0
---- !u!114 &1747611433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9203353957944293120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68efd6b4b0a45403e8f5a9f145fb7da2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 4
-  jumpSpeed: 12
-  climbSpeed: 2
-  health: 3
-  damageDelay: 1
-  knockback: 5
-  knockbackLength: 0.2
-  knockbackCount: 0
-  knockbackFromRight: 1
 --- !u!82 &-423327575147981624
 AudioSource:
   m_ObjectHideFlags: 0
