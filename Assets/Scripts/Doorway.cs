@@ -14,6 +14,7 @@ public class Doorway : MonoBehaviour
     {
         //Chenge to open door tile
         gameObject.SetActive(true);
+        
         //Change level number if this is the most recent level
         if (FindObjectOfType<GameSession>().ProgressLevel(levelNumber) < levelNumber)
         {

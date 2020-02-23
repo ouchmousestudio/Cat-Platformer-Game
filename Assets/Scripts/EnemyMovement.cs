@@ -12,10 +12,11 @@ public class EnemyMovement : MonoBehaviour
 
     Rigidbody2D myRigidbody;
     CapsuleCollider2D myColliderMid;
-    BoxCollider2D myColliderSides;
+    CircleCollider2D myColliderTop;
     Animator myAnimator;
 
     bool enemyIsAlive = true;
+    bool enemyIsAttacking = false;
 
 
     // Start is called before the first frame update
@@ -24,7 +25,7 @@ public class EnemyMovement : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>();
 
         myAnimator = GetComponent<Animator>();
-        myColliderSides = GetComponent<BoxCollider2D>();
+        myColliderTop = GetComponent<CircleCollider2D>();
         myColliderMid = GetComponent<CapsuleCollider2D>();
 
     }
@@ -43,9 +44,9 @@ public class EnemyMovement : MonoBehaviour
         }
             
 
-        if (myColliderMid.IsTouchingLayers(LayerMask.GetMask("Player")))
+        if (myColliderTop.IsTouchingLayers(LayerMask.GetMask("Player")))
         {
-            if (!enemyIsAlive)
+            if (!enemyIsAlive || enemyIsAttacking)
                 return;
             else
             {
@@ -58,12 +59,22 @@ public class EnemyMovement : MonoBehaviour
             }
             
         }
-        else if (myColliderSides.IsTouchingLayers(LayerMask.GetMask("Player")))
+        else if (myColliderMid.IsTouchingLayers(LayerMask.GetMask("Player")))
         {
+            if (!enemyIsAlive)
+                return;
+            enemyIsAttacking = true;
             FindObjectOfType<Player>().TakeDamage();
             FindObjectOfType<Player>().knockbackCount = FindObjectOfType<Player>().knockbackLength;
+            StartCoroutine(DamagePlayer());
         }
 
+    }
+
+    IEnumerator DamagePlayer()
+    {
+        yield return new WaitForSeconds(0.3f);
+        enemyIsAttacking = false;
     }
 
     private bool isFacingLeft()
