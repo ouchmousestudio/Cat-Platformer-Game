@@ -26,7 +26,7 @@ public class PlayerPrefsController : MonoBehaviour
 
     public static float GetMasterVolume()
     {
-        return PlayerPrefs.GetFloat(MASTER_VOLUME_KEY);
+        return PlayerPrefs.GetFloat(MASTER_VOLUME_KEY, 0.7f);
     }
 
     public static void SetSFXVolume(float volume)
@@ -44,6 +44,6 @@ public class PlayerPrefsController : MonoBehaviour
 
     public static float GetSFXVolume()
     {
-        return PlayerPrefs.GetFloat(SFX_VOLUME_KEY);
+        return PlayerPrefs.GetFloat(SFX_VOLUME_KEY, 0.9f);
     }
 }

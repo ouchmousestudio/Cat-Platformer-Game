@@ -12,11 +12,11 @@ public class OptionsController : MonoBehaviour
 
     void Start()
     {
-        //volumeSlider.value = PlayerPrefsController.GetMasterVolume();
-        //sfxVolumeSlider.value = PlayerPrefsController.GetSFXVolume();
+        volumeSlider.value = PlayerPrefsController.GetMasterVolume();
+        sfxVolumeSlider.value = PlayerPrefsController.GetSFXVolume();
 
-        volumeSlider.value = 0.7f;
-        sfxVolumeSlider.value = 0.9f;
+        //volumeSlider.value = 0.7f;
+        //sfxVolumeSlider.value = 0.9f;
     }
 
     void Update()
