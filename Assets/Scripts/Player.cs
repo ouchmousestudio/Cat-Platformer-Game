@@ -5,19 +5,21 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     //Config
+    public int health = 3;
+    //Player Movement
     [SerializeField] float movementSpeed = 5f;
     [SerializeField] float jumpSpeed = 6f;
     [SerializeField] float climbSpeed = 2f;
-    [SerializeField] int health = 3;
+    //For damage knockback effect
     [SerializeField] float damageDelay = 1f;
     [SerializeField] float knockback = 5f;
     public float knockbackLength = 0.2f;
     public float knockbackCount = 0f;
     public bool knockbackFromRight;
 
-
     //State
     bool isAlive = true;
+    bool isImmune = false;
 
     //Cached component refernces
     Rigidbody2D myRigidbody;
@@ -25,10 +27,8 @@ public class Player : MonoBehaviour
     CapsuleCollider2D myColliderBody; //Unused
     BoxCollider2D myColliderFeet;
 
-
     float gravityAtStart;
 
-    // Start is called before the first frame update
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
@@ -43,7 +43,6 @@ public class Player : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!isAlive)
@@ -134,6 +133,7 @@ public class Player : MonoBehaviour
 
     }
 
+    //When Player Takes Damage
     public void TakeDamage()
     {
         if(!isAlive)
@@ -153,8 +153,16 @@ public class Player : MonoBehaviour
 
     IEnumerator ProcessDamage()
     {
+        if (!isImmune)
+        {
+            isImmune = true;
+            health--;
+            FindObjectOfType<SFXPlayer>().DamageMeow();
+            FindObjectOfType<UIController>().UpdateHealth();  
+        }
         yield return new WaitForSecondsRealtime(damageDelay);
-        health--;
+        isImmune = false;
+
     }
 
     IEnumerator DeathAnimation()
@@ -177,7 +185,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (transform.position.x < collision.transform.position.x)
             knockbackFromRight = true;

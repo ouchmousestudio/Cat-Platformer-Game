@@ -141,5 +141,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathMeow: {fileID: 8300000, guid: c304626d2aabb486985824d9ab3fa6f9, type: 3}
-  happyMeow: {fileID: 8300000, guid: 1b6938d3039b7453599760849364b69b, type: 3}
+  happyMeow: {fileID: 8300000, guid: 56f20a121a76b4fb1a31e82341f23eca, type: 3}
+  damageMeow: {fileID: 8300000, guid: 1b6938d3039b7453599760849364b69b, type: 3}
   deathSqueak: {fileID: 8300000, guid: e5422a4a5c1d84526913b77a957a5eea, type: 3}

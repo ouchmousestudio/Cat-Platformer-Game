@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameSession : MonoBehaviour
 {
 
-    [SerializeField] int playerLives = 3;
+    public int playerLives = 3;
 
     public int levelNumber = 0;
     public int score = 0;
@@ -48,8 +48,7 @@ public class GameSession : MonoBehaviour
     private void RemoveLife()
     {
         playerLives--;
-        //var currentScene = SceneManager.GetActiveScene().buildIndex;
-        //SceneManager.LoadScene(currentScene);
+        FindObjectOfType<UIController>().UpdateLives();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

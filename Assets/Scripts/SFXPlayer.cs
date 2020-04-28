@@ -6,7 +6,9 @@ public class SFXPlayer : MonoBehaviour
 {
     [SerializeField] AudioClip deathMeow;
     [SerializeField] AudioClip happyMeow;
+    [SerializeField] AudioClip damageMeow;
     [SerializeField] AudioClip deathSqueak;
+    
 
     AudioSource myAudioSource;
 
@@ -34,7 +36,12 @@ public class SFXPlayer : MonoBehaviour
 
     public void HappyMeow()
     {
-        myAudioSource.PlayOneShot(happyMeow, 1f);
+        myAudioSource.PlayOneShot(happyMeow, 0.4f);
+    }
+
+    public void DamageMeow()
+    {
+        myAudioSource.PlayOneShot(damageMeow, 2f);
     }
 
     public void DeathSqueak()

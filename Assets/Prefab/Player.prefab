@@ -978,17 +978,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68efd6b4b0a45403e8f5a9f145fb7da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 3
   movementSpeed: 4
   jumpSpeed: 12
   climbSpeed: 2
-  health: 3
   damageDelay: 1
   knockback: 5
   knockbackLength: 0.2
   knockbackCount: 0
   knockbackFromRight: 1
-  myMaterial: {fileID: 2100000, guid: 43146c788c45e40eea8e30d344672eb8, type: 2}
-  dissolveSpeed: 1
 --- !u!50 &9203353957944293131
 Rigidbody2D:
   serializedVersion: 4
@@ -1023,8 +1021,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.019620419}
-  m_Size: {x: 0.94285715, y: 1.2750449}
+  m_Offset: {x: 0.0035581589, y: 0.056979418}
+  m_Size: {x: 0.86458015, y: 1.2572546}
   m_Direction: 0
 --- !u!61 &1747611434
 BoxCollider2D:
@@ -1039,7 +1037,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.018614054, y: -0.50679255}
+  m_Offset: {x: 0.0023431778, y: -0.50679255}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1050,7 +1048,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6389899, y: 0.22084069}
+  m_Size: {x: 0.504035, y: 0.22084069}
   m_EdgeRadius: 0
 --- !u!82 &-423327575147981624
 AudioSource:
