@@ -28,6 +28,7 @@ public class LevelIcon : MonoBehaviour
         {
             levelText.text = sceneName;
 
+            //Enable Level counter
             //if (thisLevel <= FindObjectOfType<GameSession>().levelNumber)
             //{
                 levelText.text = sceneName;

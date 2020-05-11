@@ -20,17 +20,14 @@ public class Menu : MonoBehaviour
 
     private void Awake()
     {
-        //Start Tween
+        //Start Tween - Title Fade in
         for (int i = 0; i < tweenArray.Length; i++)
         {
             LeanTween.scale(tweenArray[i].tweenText, tweenArray[i].tweenSize, tweenArray[i].tweenTime).setEase(LeanTweenType.linear).setDelay(tweenArray[i].tweenDelayTime);
-
         }
-
     }
 
-
-
+    //Scene Management
     public void StartFirstLevel()
     {
         SceneManager.LoadScene("World Map");

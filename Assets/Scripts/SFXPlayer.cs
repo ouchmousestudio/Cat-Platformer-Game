@@ -36,7 +36,7 @@ public class SFXPlayer : MonoBehaviour
 
     public void HappyMeow()
     {
-        myAudioSource.PlayOneShot(happyMeow, 0.4f);
+        myAudioSource.PlayOneShot(happyMeow, 0.2f);
     }
 
     public void DamageMeow()

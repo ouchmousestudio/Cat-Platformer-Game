@@ -7,13 +7,13 @@ public class Doorway : MonoBehaviour
     
 {
     [SerializeField] float levelLoadDelay = 1f;
-    [SerializeField] GameObject gameObject;
+    [SerializeField] GameObject openDoor;
     [SerializeField] int levelNumber;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Chenge to open door tile
-        gameObject.SetActive(true);
+        openDoor.SetActive(true);
         
         //Change level number if this is the most recent level
         if (FindObjectOfType<GameSession>().ProgressLevel(levelNumber) < levelNumber)

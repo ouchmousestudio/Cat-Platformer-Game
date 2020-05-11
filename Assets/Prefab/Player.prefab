@@ -872,8 +872,8 @@ GameObject:
   - component: {fileID: 1747611433}
   - component: {fileID: 9203353957944293131}
   - component: {fileID: 9203353957944293124}
-  - component: {fileID: 1747611434}
   - component: {fileID: -423327575147981624}
+  - component: {fileID: 3085997850905424609}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -1021,35 +1021,9 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0035581589, y: 0.056979418}
-  m_Size: {x: 0.86458015, y: 1.2572546}
+  m_Offset: {x: 0.005343795, y: 0.056979418}
+  m_Size: {x: 0.7967241, y: 1.2572546}
   m_Direction: 0
---- !u!61 &1747611434
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9203353957944293120}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0023431778, y: -0.50679255}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8428571, y: 1.2571429}
-    newSize: {x: 0.66, y: 0.92}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.504035, y: 0.22084069}
-  m_EdgeRadius: 0
 --- !u!82 &-423327575147981624
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1146,3 +1120,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!60 &3085997850905424609
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9203353957944293120}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.8428571, y: 1.2571429}
+    newSize: {x: 0.66, y: 0.92}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.19215393, y: -0.60712385}
+      - {x: 0.33504915, y: -0.37848067}
+      - {x: -0.31517458, y: -0.38068128}
+      - {x: -0.187675, y: -0.60712385}

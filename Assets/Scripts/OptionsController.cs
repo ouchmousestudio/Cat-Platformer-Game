@@ -14,9 +14,6 @@ public class OptionsController : MonoBehaviour
     {
         volumeSlider.value = PlayerPrefsController.GetMasterVolume();
         sfxVolumeSlider.value = PlayerPrefsController.GetSFXVolume();
-
-        //volumeSlider.value = 0.7f;
-        //sfxVolumeSlider.value = 0.9f;
     }
 
     void Update()

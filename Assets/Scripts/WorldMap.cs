@@ -6,9 +6,7 @@ using UnityEngine;
 public class WorldMap : MonoBehaviour
 {
     [SerializeField] GameObject[] level;
-    [SerializeField] float movementSpeed = 3f;
-
-    Rigidbody2D myRigidbody;
+    [SerializeField] float movementSpeed = 2f;
 
     [SerializeField] Transform movePoint;
 
@@ -18,41 +16,26 @@ public class WorldMap : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        
-
         //Reset player position
         int levelNumber = FindObjectOfType<GameSession>().levelNumber;
-
 
         if (levelNumber > 0)
         {
             gameObject.transform.position = FindObjectOfType<GameSession>().lastLocation;
             movePoint.position = FindObjectOfType<GameSession>().lastLocation;
         }
-
         //Unparent the movepoint
         movePoint.parent = null;
-
-        myRigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
         Movement();
-
     }
 
     void Movement()
     {
-        //Smooth movement type
-        //float xMove = Input.GetAxis("Horizontal");
-        //float yMove = Input.GetAxis("Vertical");
-        //Vector2 playerVelocity = new Vector2(xMove * movementSpeed, yMove * movementSpeed);
-        //myRigidbody.velocity = playerVelocity;
-
-
-
         //Input by steps
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, movementSpeed * Time.deltaTime);
 
@@ -80,10 +63,7 @@ public class WorldMap : MonoBehaviour
 
         }
 
-
-
     }
-
 
 }
 

@@ -6,7 +6,7 @@ public class EnemyMouse : MonoBehaviour
 {
     [SerializeField] float movementSpeed = 1f;
     [SerializeField] GameObject splatterParticles;
-    [SerializeField] float dyingTime = 0.5f;
+    [SerializeField] float dyingTime = 0.3f;
     [SerializeField] GameObject player;
 
     [SerializeField] bool canMove;
@@ -26,7 +26,6 @@ public class EnemyMouse : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         myColliderTop = GetComponent<CircleCollider2D>();
         myColliderMid = GetComponent<CapsuleCollider2D>();
-
     }
 
     void Update()
@@ -42,8 +41,6 @@ public class EnemyMouse : MonoBehaviour
                 myRigidbody.velocity = new Vector2(movementSpeed, 0f);
             }
         }
-
-
 
         if (myColliderTop.IsTouchingLayers(LayerMask.GetMask("Player")))
         {
@@ -61,6 +58,8 @@ public class EnemyMouse : MonoBehaviour
             }
 
         }
+
+        //Knockback player when he takes damage
         else if (myColliderMid.IsTouchingLayers(LayerMask.GetMask("Player")))
         {
             if (!enemyIsAlive)

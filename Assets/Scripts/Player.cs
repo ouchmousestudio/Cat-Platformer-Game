@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     Rigidbody2D myRigidbody;
     Animator myAnimator;
     CapsuleCollider2D myColliderBody; //Unused
-    BoxCollider2D myColliderFeet;
+    PolygonCollider2D myColliderFeet;
 
     float gravityAtStart;
 
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         myColliderBody = GetComponent<CapsuleCollider2D>();
-        myColliderFeet = GetComponent<BoxCollider2D>();
+        myColliderFeet = GetComponent<PolygonCollider2D>();
 
         gravityAtStart = myRigidbody.gravityScale;
 
@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
         Vector2 playerVelocity = new Vector2(controlThrow * movementSpeed, myRigidbody.velocity.y);
         myRigidbody.velocity = playerVelocity;
         //myRigidbody.velocity = playerVelocity * Time.deltaTime;
-        
+
     }
 
     void FlipSprite()
@@ -127,7 +127,6 @@ public class Player : MonoBehaviour
         Vector2 climbVelocity = new Vector2(myRigidbody.velocity.x, controlThrow * climbSpeed);
         myRigidbody.velocity = climbVelocity;
 
-        //bool playerHasVerticalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
         myAnimator.SetBool("Jumping", false);
         myAnimator.SetBool("Climbing", true);
 
