@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     //Player Movement
     [SerializeField] float movementSpeed = 5f;
     [SerializeField] float jumpSpeed = 6f;
+    float jumpPressedDelay = 0f;
+    float jumpPressedDelayTime = 0.2f;
     [SerializeField] float climbSpeed = 2f;
     //For damage knockback effect
     [SerializeField] float damageDelay = 1f;
@@ -40,7 +42,6 @@ public class Player : MonoBehaviour
 
         //Dissolve at start of level
         FindObjectOfType<Dissolve>().DissolveIn();
-
     }
 
     void Update()
@@ -56,7 +57,6 @@ public class Player : MonoBehaviour
             Walk();
             FlipSprite();
             WaterDeath(); //TODO change
-
         }
         else
         {
@@ -75,7 +75,6 @@ public class Player : MonoBehaviour
         Vector2 playerVelocity = new Vector2(controlThrow * movementSpeed, myRigidbody.velocity.y);
         myRigidbody.velocity = playerVelocity;
         //myRigidbody.velocity = playerVelocity * Time.deltaTime;
-
     }
 
     void FlipSprite()
@@ -92,7 +91,16 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        if(!myColliderFeet.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        //Timer for Jump
+        jumpPressedDelay -= Time.deltaTime;
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpPressedDelay = jumpPressedDelayTime;
+        }
+
+        //Change Animation State
+        if (!myColliderFeet.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             myAnimator.SetBool("Jumping", true);
             return;
@@ -101,11 +109,10 @@ public class Player : MonoBehaviour
         {
             myAnimator.SetBool("Jumping", false);
         }
-
-        if (Input.GetButtonDown("Jump"))
+        
+        if (jumpPressedDelay > 0)
         {
-            //Change Animation State
-
+            jumpPressedDelay = 0;
             Vector2 jumpVelocity = new Vector2(0f, jumpSpeed);
             myRigidbody.velocity += jumpVelocity;
         }

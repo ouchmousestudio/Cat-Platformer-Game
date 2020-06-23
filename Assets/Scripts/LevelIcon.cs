@@ -57,8 +57,5 @@ public class LevelIcon : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(1f);
         SceneManager.LoadScene(sceneName);
-
     }
-
-
 }
