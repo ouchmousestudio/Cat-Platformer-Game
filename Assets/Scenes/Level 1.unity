@@ -43,7 +43,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 12
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_LightingSettings: {fileID: 853794283}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -118,6 +118,8 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
@@ -168,6 +170,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -629,6 +632,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -844,6 +848,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3169,7 +3174,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 4.8
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3193,7 +3198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.1800003, y: -1.3659999, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1193233366}
@@ -3349,6 +3354,67 @@ PolygonCollider2D:
     type: 3}
   m_PrefabInstance: {fileID: 763871855}
   m_PrefabAsset: {fileID: 0}
+--- !u!850595691 &853794283
+LightingSettings:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Settings.lighting
+  serializedVersion: 2
+  m_GIWorkflowMode: 1
+  m_EnableBakedLightmaps: 0
+  m_EnableRealtimeLightmaps: 0
+  m_RealtimeEnvironmentLighting: 1
+  m_BounceScale: 1
+  m_AlbedoBoost: 1
+  m_IndirectOutputScale: 1
+  m_UsingShadowmask: 1
+  m_BakeBackend: 0
+  m_LightmapMaxSize: 1024
+  m_BakeResolution: 40
+  m_Padding: 2
+  m_TextureCompression: 1
+  m_AO: 0
+  m_AOMaxDistance: 1
+  m_CompAOExponent: 1
+  m_CompAOExponentDirect: 0
+  m_ExtractAO: 0
+  m_MixedBakeMode: 2
+  m_LightmapsBakeMode: 1
+  m_FilterMode: 1
+  m_LightmapParameters: {fileID: 0}
+  m_ExportTrainingData: 0
+  m_TrainingDataDestination: TrainingData
+  m_RealtimeResolution: 2
+  m_ForceWhiteAlbedo: 0
+  m_ForceUpdates: 0
+  m_FinalGather: 0
+  m_FinalGatherRayCount: 256
+  m_FinalGatherFiltering: 1
+  m_PVRCulling: 1
+  m_PVRSampling: 1
+  m_PVRDirectSampleCount: 32
+  m_PVRSampleCount: 500
+  m_PVREnvironmentSampleCount: 500
+  m_PVREnvironmentReferencePointCount: 2048
+  m_LightProbeSampleCountMultiplier: 4
+  m_PVRBounces: 2
+  m_PVRRussianRouletteStartBounce: 2
+  m_PVREnvironmentMIS: 0
+  m_PVRFilteringMode: 2
+  m_PVRDenoiserTypeDirect: 0
+  m_PVRDenoiserTypeIndirect: 0
+  m_PVRDenoiserTypeAO: 0
+  m_PVRFilterTypeDirect: 0
+  m_PVRFilterTypeIndirect: 0
+  m_PVRFilterTypeAO: 0
+  m_PVRFilteringGaussRadiusDirect: 1
+  m_PVRFilteringGaussRadiusIndirect: 5
+  m_PVRFilteringGaussRadiusAO: 2
+  m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+  m_PVRFilteringAtrousPositionSigmaIndirect: 2
+  m_PVRFilteringAtrousPositionSigmaAO: 1
 --- !u!1 &858398897
 GameObject:
   m_ObjectHideFlags: 0
@@ -3452,8 +3518,7 @@ MonoBehaviour:
   m_LayerIndex: 0
   m_ShowDebugText: 0
   m_EnableAllChildCameras: 0
-  m_ChildCameras:
-  - {fileID: 336259452}
+  m_ChildCameras: []
   m_Instructions:
   - m_FullHash: -2010423537
     m_VirtualCamera: {fileID: 0}
@@ -3545,6 +3610,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bad760793eb945b49029cde526803bd, type: 3}
+--- !u!1 &1094928914 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4783532410973428892, guid: b28cdf1c9ffeb48aca18fc1d3b6b0584,
+    type: 3}
+  m_PrefabInstance: {fileID: 4783532411549870467}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1193233365
 GameObject:
   m_ObjectHideFlags: 0
@@ -3623,7 +3694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df346ad375af54f4ebb3fb06e88a845e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelLoadDelay: 0.5
+  levelLoadDelay: 0.3
   openDoor: {fileID: 8985501}
   levelNumber: 1
 --- !u!19719996 &1198995449
@@ -3657,6 +3728,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4151,6 +4223,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4604,17 +4677,17 @@ PrefabInstance:
     - target: {fileID: 7224617216650967509, guid: f3c82dedde50f4876948a389c0183c85,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.1219883
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7224617216650967509, guid: f3c82dedde50f4876948a389c0183c85,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.1583674
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7224617216650967509, guid: f3c82dedde50f4876948a389c0183c85,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -362.22183
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7224617216650967509, guid: f3c82dedde50f4876948a389c0183c85,
         type: 3}
@@ -4910,6 +4983,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4783532411949678592, guid: b28cdf1c9ffeb48aca18fc1d3b6b0584,
+        type: 3}
+      propertyPath: heart1
+      value: 
+      objectReference: {fileID: 1094928914}
     - target: {fileID: 4783532411949678593, guid: b28cdf1c9ffeb48aca18fc1d3b6b0584,
         type: 3}
       propertyPath: m_LocalPosition.x

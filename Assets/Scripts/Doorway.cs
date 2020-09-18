@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Doorway : MonoBehaviour
     
 {
-    [SerializeField] float levelLoadDelay = 1f;
+    float levelLoadDelay = 0.3f;
     [SerializeField] GameObject openDoor;
     [SerializeField] int levelNumber;
 

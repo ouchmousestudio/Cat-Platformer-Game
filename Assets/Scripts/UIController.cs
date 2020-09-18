@@ -9,9 +9,9 @@ public class UIController : MonoBehaviour
     int playerLives = 3;
     int playerHealth;
 
-    [SerializeField] GameObject health1;
-    [SerializeField] GameObject health2;
-    [SerializeField] GameObject health3;
+    [SerializeField] GameObject heart1;
+    [SerializeField] GameObject heart2;
+    [SerializeField] GameObject heart3;
     [SerializeField] TextMeshProUGUI livesText;
 
     // Start is called before the first frame update
@@ -30,7 +30,7 @@ public class UIController : MonoBehaviour
     public void UpdateHealth()
     {
         playerHealth = FindObjectOfType<Player>().health;
-        UpdateIcons(playerHealth, health1, health2, health3);
+        UpdateIcons(playerHealth, heart1, heart2, heart3);
 
     }
 
