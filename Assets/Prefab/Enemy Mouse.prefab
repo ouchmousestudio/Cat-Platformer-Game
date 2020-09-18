@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8750908536269332910}
   - component: {fileID: -1145747495379386587}
   m_Layer: 12
-  m_Name: Mouse
+  m_Name: Enemy Mouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,6 +201,6 @@ MonoBehaviour:
   movementSpeed: 1
   splatterParticles: {fileID: 3175535758834852074, guid: cc1c19ab0b7014b0ca5615ee49435b3d,
     type: 3}
-  dyingTime: 0.5
+  dyingTime: 0.3
   player: {fileID: 9203353957944293120, guid: d4d4e050f980b4ac195e5d90cf4c0d83, type: 3}
   canMove: 1
