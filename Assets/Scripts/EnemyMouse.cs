@@ -9,8 +9,6 @@ public class EnemyMouse : MonoBehaviour
     [SerializeField] float dyingTime = 0.3f;
     [SerializeField] GameObject player;
 
-    [SerializeField] bool canMove;
-
     Rigidbody2D myRigidbody;
     CapsuleCollider2D myColliderMid;
     CircleCollider2D myColliderTop;
@@ -30,17 +28,14 @@ public class EnemyMouse : MonoBehaviour
 
     void Update()
     {
-        if (canMove)
-        {
-            if (isFacingLeft())
+        if (isFacingLeft())
             {
                 myRigidbody.velocity = new Vector2(-movementSpeed, 0f);
             }
-            else
+        else
             {
                 myRigidbody.velocity = new Vector2(movementSpeed, 0f);
             }
-        }
 
         if (myColliderTop.IsTouchingLayers(LayerMask.GetMask("Player")))
         {

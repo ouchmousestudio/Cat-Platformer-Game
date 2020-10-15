@@ -3518,7 +3518,8 @@ MonoBehaviour:
   m_LayerIndex: 0
   m_ShowDebugText: 0
   m_EnableAllChildCameras: 0
-  m_ChildCameras: []
+  m_ChildCameras:
+  - {fileID: 336259452}
   m_Instructions:
   - m_FullHash: -2010423537
     m_VirtualCamera: {fileID: 0}
@@ -3694,7 +3695,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df346ad375af54f4ebb3fb06e88a845e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelLoadDelay: 0.3
   openDoor: {fileID: 8985501}
   levelNumber: 1
 --- !u!19719996 &1198995449

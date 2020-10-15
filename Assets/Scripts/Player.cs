@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] float movementSpeed = 5f;
     [SerializeField] float jumpSpeed = 6f;
     float jumpPressedDelay = 0f;
-    float jumpPressedDelayTime = 0.2f;
+    float jumpPressedDelayTime = 0.15f;
     [SerializeField] float climbSpeed = 2f;
     //For damage knockback effect
     [SerializeField] float damageDelay = 1f;

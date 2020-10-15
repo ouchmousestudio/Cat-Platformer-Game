@@ -5,10 +5,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] float movementSpeed = 1f;
-    [SerializeField] float dyingTime = 0.5f;
     [SerializeField] GameObject player;
-
 
     Rigidbody2D myRigidbody;
     CapsuleCollider2D myCollider;
@@ -28,10 +25,15 @@ public class Enemy : MonoBehaviour
 
         if (myCollider.IsTouchingLayers(LayerMask.GetMask("Player")))
         {
-            enemyIsAttacking = true;
-            FindObjectOfType<Player>().TakeDamage();
-            FindObjectOfType<Player>().knockbackCount = FindObjectOfType<Player>().knockbackLength;
-            StartCoroutine(DamagePlayer());
+            if (enemyIsAttacking)
+                return;
+            else
+            {
+                enemyIsAttacking = true;
+                FindObjectOfType<Player>().TakeDamage();
+                FindObjectOfType<Player>().knockbackCount = FindObjectOfType<Player>().knockbackLength;
+                StartCoroutine(DamagePlayer());
+            }
         }
     }
 
@@ -41,8 +43,4 @@ public class Enemy : MonoBehaviour
         enemyIsAttacking = false;
     }
 
-    private bool isFacingUp()
-    {
-        return transform.localScale.y > 0;
-    }
 }
