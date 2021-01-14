@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class OptionsController : MonoBehaviour
 {
-    [SerializeField] Slider volumeSlider;
-    [SerializeField] float defaultVolume = 0.7f;
-    [SerializeField] Slider sfxVolumeSlider;
-    [SerializeField] float defaultSfxVolume = 0.7f;
+    [SerializeField] private Slider volumeSlider;
+    [SerializeField] private float defaultVolume = 0.7f;
+    [SerializeField] private Slider sfxVolumeSlider;
+    [SerializeField] private float defaultSfxVolume = 0.7f;
 
     void Start()
     {
@@ -24,7 +24,6 @@ public class OptionsController : MonoBehaviour
         {
             musicPlayer.SetVolume(volumeSlider.value);
             sfxPlayer.SetVolume(sfxVolumeSlider.value);
-
         }
         else
         {

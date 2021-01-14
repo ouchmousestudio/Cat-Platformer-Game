@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 public class Doorway : MonoBehaviour
     
 {
-    float levelLoadDelay = 0.3f;
-    [SerializeField] GameObject openDoor;
-    [SerializeField] int levelNumber;
+    [SerializeField] private GameObject openDoor;
+    [SerializeField] private int levelNumber;
+
+    private float levelLoadDelay = 0.3f;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

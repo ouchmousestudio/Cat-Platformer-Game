@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | Catformer</title>
+  </head>
+  <body style="text-align: center">
+    <canvas id="unity-canvas" style="width: 960px; height: 600px; background: #B4DCF1"></canvas>
+    <script src="Build/webGL.loader.js"></script>
+    <script>
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/webGL.data",
+        frameworkUrl: "Build/webGL.framework.js",
+        codeUrl: "Build/webGL.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Ouch Mouse Studio",
+        productName: "Catformer",
+        productVersion: "0.1",
+      });
+    </script>
+  </body>
+</html>

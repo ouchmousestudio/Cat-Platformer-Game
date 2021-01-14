@@ -5,10 +5,10 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     Animator myAnimator;
-    [SerializeField] ParticleSystem coinSparkle;
-    [SerializeField] GameObject catCoinSprite;
+    [SerializeField] private ParticleSystem coinSparkle;
+    [SerializeField] private GameObject catCoinSprite;
 
-    bool pickedUp = false;
+    private bool pickedUp = false;
 
     private void Start()
     {
@@ -23,7 +23,7 @@ public class Coin : MonoBehaviour
             //Add Sparkle particle effect on pickup.
             catCoinSprite.SetActive(false);
 
-            Destroy(gameObject, 0.3f);
+            Destroy(gameObject, 0.8f);
             coinSparkle.Play();
             FindObjectOfType<GameSession>().AddToScore();
             FindObjectOfType<SFXPlayer>().HappyMeow();

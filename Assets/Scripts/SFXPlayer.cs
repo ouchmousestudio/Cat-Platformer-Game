@@ -4,18 +4,15 @@ using UnityEngine;
 
 public class SFXPlayer : MonoBehaviour
 {
-    [SerializeField] AudioClip deathMeow;
-    [SerializeField] AudioClip happyMeow;
-    [SerializeField] AudioClip damageMeow;
-    [SerializeField] AudioClip deathSqueak;
-    
+    [SerializeField] private AudioClip deathMeow;
+    [SerializeField] private AudioClip happyMeow;
+    [SerializeField] private AudioClip damageMeow;
+    [SerializeField] private AudioClip deathSqueak;
+
+    [SerializeField] private AudioClip[] sample;
 
     AudioSource myAudioSource;
 
-    private void Start()
-    {
-        myAudioSource = GetComponent<AudioSource>();
-    }
     //Singleton
     private void Awake()
     {
@@ -29,6 +26,12 @@ public class SFXPlayer : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
+
+    private void Start()
+    {
+        myAudioSource = GetComponent<AudioSource>();
+    }
+
     public void DeathMeow()
     {
         myAudioSource.PlayOneShot(deathMeow, 1f);
@@ -47,6 +50,11 @@ public class SFXPlayer : MonoBehaviour
     public void DeathSqueak()
     {
         myAudioSource.PlayOneShot(deathSqueak, 1f);
+    }
+
+    public void PlaySFX(int sampleNum)
+    {
+        myAudioSource.PlayOneShot(sample[sampleNum], 1f);
     }
 
     public void SetVolume(float volume)

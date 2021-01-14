@@ -6,39 +6,41 @@ public class Player : MonoBehaviour
 {
     //Config
     public int health = 3;
-    //Player Movement
-    [SerializeField] float movementSpeed = 5f;
-    [SerializeField] float jumpSpeed = 6f;
-    float jumpPressedDelay = 0f;
-    float jumpPressedDelayTime = 0.15f;
-    [SerializeField] float climbSpeed = 2f;
+    [Header("Player Movement")]
+    [SerializeField] private float movementSpeed = 5f;
+    [SerializeField] private float jumpSpeed = 6f;
+    private float jumpPressedDelay = 0f;
+    private float jumpPressedDelayTime = 0.15f;
+    [SerializeField] private float climbSpeed = 2f;
     //For damage knockback effect
-    [SerializeField] float damageDelay = 1f;
-    [SerializeField] float knockback = 5f;
+    [Header("Player Knockback")]
+    [SerializeField] private float damageDelay = 1f;
+    [SerializeField] private float knockback = 5f;
+
     public float knockbackLength = 0.2f;
     public float knockbackCount = 0f;
     public bool knockbackFromRight;
 
-    //State
-    bool isAlive = true;
-    bool isImmune = false;
+    private Vector2 movement;
 
-    //Cached component refernces
-    Rigidbody2D myRigidbody;
-    Animator myAnimator;
-    CapsuleCollider2D myColliderBody; //Unused
-    PolygonCollider2D myColliderFeet;
+    //Bool states
+    private bool isAlive = true;
+    private bool isImmune = false;
 
-    float gravityAtStart;
+    private Rigidbody2D rb2d;
+    private Animator myAnimator;
+    private PolygonCollider2D myColliderFeet;
+
+    private float gravityAtStart;
 
     void Start()
     {
-        myRigidbody = GetComponent<Rigidbody2D>();
+        //Cached component refernces
+        rb2d = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
-        myColliderBody = GetComponent<CapsuleCollider2D>();
         myColliderFeet = GetComponent<PolygonCollider2D>();
 
-        gravityAtStart = myRigidbody.gravityScale;
+        gravityAtStart = rb2d.gravityScale;
 
         //Dissolve at start of level
         FindObjectOfType<Dissolve>().DissolveIn();
@@ -50,56 +52,67 @@ public class Player : MonoBehaviour
         {
             return;
         }
+        GetInput();
+        WaterDeath();
+    }
+
+    void FixedUpdate()
+    {
+        //The player will be knocked back on collisions. 
         if (knockbackCount <= 0)
         {
-            Jump();
-            Climb();
             Walk();
+            Jump();
             FlipSprite();
-            WaterDeath(); //TODO change
+            Climb();
         }
         else
         {
             myAnimator.SetTrigger("Damage");
             if (knockbackFromRight)
-                myRigidbody.velocity = new Vector2(-knockback, knockback);
+                rb2d.velocity = new Vector2(-knockback, knockback);
             if (!knockbackFromRight)
-                myRigidbody.velocity = new Vector2(knockback, knockback);
+                rb2d.velocity = new Vector2(knockback, knockback);
             knockbackCount -= Time.deltaTime;
         }
     }
 
     void Walk()
     {
-        float controlThrow = Input.GetAxis("Horizontal");
-        Vector2 playerVelocity = new Vector2(controlThrow * movementSpeed, myRigidbody.velocity.y);
-        myRigidbody.velocity = playerVelocity;
-        //myRigidbody.velocity = playerVelocity * Time.deltaTime;
+        float controlThrow = movement.x;
+        Vector2 playerVelocity = new Vector2(controlThrow * movementSpeed, rb2d.velocity.y);
+        rb2d.velocity = playerVelocity;
+    }
+
+    void GetInput()
+    {
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
+
+        movement.Normalize();
+
+        jumpPressedDelay -= Time.deltaTime;
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpPressedDelay = jumpPressedDelayTime;
+        }
     }
 
     void FlipSprite()
     {
         //Check input for horizontal motion
-        bool playerHasHorizontalSpeed = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;
+        bool playerHasHorizontalSpeed = Mathf.Abs(rb2d.velocity.x) > Mathf.Epsilon;
         //Change Animation State
         myAnimator.SetBool("Walking", playerHasHorizontalSpeed);
         if (playerHasHorizontalSpeed)
         {
-            transform.localScale = new Vector2(Mathf.Sign(myRigidbody.velocity.x), 1);
+            transform.localScale = new Vector2(Mathf.Sign(rb2d.velocity.x), 1);
         }
     }
 
     void Jump()
     {
-        //Timer for Jump
-        jumpPressedDelay -= Time.deltaTime;
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            jumpPressedDelay = jumpPressedDelayTime;
-        }
-
-        //Change Animation State
+        //Play jump animation for jump, or for falling
         if (!myColliderFeet.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             myAnimator.SetBool("Jumping", true);
@@ -109,14 +122,14 @@ public class Player : MonoBehaviour
         {
             myAnimator.SetBool("Jumping", false);
         }
-        
+
+        //Jump delay to allow jumping just before landing
         if (jumpPressedDelay > 0)
         {
             jumpPressedDelay = 0;
             Vector2 jumpVelocity = new Vector2(0f, jumpSpeed);
-            myRigidbody.velocity += jumpVelocity;
+            rb2d.velocity += jumpVelocity;
         }
-
     }
 
     void Climb()
@@ -124,19 +137,18 @@ public class Player : MonoBehaviour
         if (!myColliderFeet.IsTouchingLayers(LayerMask.GetMask("Ladder")))
         {
             myAnimator.SetBool("Climbing", false);
-            myRigidbody.gravityScale = gravityAtStart;
+            rb2d.gravityScale = gravityAtStart;
             return;
         }
 
-        myRigidbody.gravityScale = 0f;
+        rb2d.gravityScale = 0f;
 
-        float controlThrow = Input.GetAxis("Vertical");
-        Vector2 climbVelocity = new Vector2(myRigidbody.velocity.x, controlThrow * climbSpeed);
-        myRigidbody.velocity = climbVelocity;
+        float controlThrow = movement.y;
+        Vector2 climbVelocity = new Vector2(rb2d.velocity.x, controlThrow * climbSpeed);
+        rb2d.velocity = climbVelocity;
 
         myAnimator.SetBool("Jumping", false);
         myAnimator.SetBool("Climbing", true);
-
     }
 
     //When Player Takes Damage
@@ -168,7 +180,6 @@ public class Player : MonoBehaviour
         }
         yield return new WaitForSecondsRealtime(damageDelay);
         isImmune = false;
-
     }
 
     IEnumerator DeathAnimation()
@@ -179,7 +190,7 @@ public class Player : MonoBehaviour
         FindObjectOfType<GameSession>().ProcessPlayerDeath();
     }
 
-    void WaterDeath() //TODO change
+    void WaterDeath()
     {
         if (myColliderFeet.IsTouchingLayers(LayerMask.GetMask("Water")))
         {
@@ -187,10 +198,10 @@ public class Player : MonoBehaviour
             isAlive = false;
             FindObjectOfType<SFXPlayer>().DeathMeow();
             StartCoroutine(DeathAnimation());
-
         }
     }
 
+    //Collision with enemy
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (transform.position.x < collision.transform.position.x)

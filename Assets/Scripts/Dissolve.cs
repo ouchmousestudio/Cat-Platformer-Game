@@ -7,9 +7,9 @@ public class Dissolve : MonoBehaviour
 
     [SerializeField] Material myMaterial;
 
-    bool isDissolving = true;
+    private bool isDissolving = true;
 
-    float dissolveAmount = 0f;
+    private float dissolveAmount = 0f;
     [SerializeField] float dissolveSpeed = 1f;
 
     private void Update()

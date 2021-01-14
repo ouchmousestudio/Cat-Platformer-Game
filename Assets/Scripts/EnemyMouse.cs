@@ -28,14 +28,6 @@ public class EnemyMouse : MonoBehaviour
 
     void Update()
     {
-        if (isFacingLeft())
-            {
-                myRigidbody.velocity = new Vector2(-movementSpeed, 0f);
-            }
-        else
-            {
-                myRigidbody.velocity = new Vector2(movementSpeed, 0f);
-            }
 
         if (myColliderTop.IsTouchingLayers(LayerMask.GetMask("Player")))
         {
@@ -47,11 +39,10 @@ public class EnemyMouse : MonoBehaviour
                 movementSpeed = 0;
                 myAnimator.SetBool("IsDead", true);
                 FindObjectOfType<SFXPlayer>().DeathSqueak();
-                //Particle FX
-                //Instantiate(splatterParticles, transform.position, Quaternion.identity);
+                //Could add a death animation or particle effect here.
+
                 enemyIsAlive = false;
             }
-
         }
 
         //Knockback player when he takes damage
@@ -64,7 +55,18 @@ public class EnemyMouse : MonoBehaviour
             FindObjectOfType<Player>().knockbackCount = FindObjectOfType<Player>().knockbackLength;
             StartCoroutine(DamagePlayer());
         }
+    }
 
+    private void FixedUpdate()
+    {
+        if (isFacingLeft())
+        {
+            myRigidbody.velocity = new Vector2(-movementSpeed, 0f);
+        }
+        else
+        {
+            myRigidbody.velocity = new Vector2(movementSpeed, 0f);
+        }
     }
 
     IEnumerator DamagePlayer()

@@ -29,8 +29,8 @@ public class LevelIcon : MonoBehaviour
             levelText.text = sceneName;
 
             //Enable Level counter
-            //if (thisLevel <= FindObjectOfType<GameSession>().levelNumber)
-            //{
+            if (thisLevel <= FindObjectOfType<GameSession>().levelNumber)
+            {
                 levelText.text = sceneName;
                 levelText.color = new Color32(255, 255, 255, 200);
 
@@ -41,12 +41,12 @@ public class LevelIcon : MonoBehaviour
                     FindObjectOfType<Dissolve>().DissolveOut();
                     StartCoroutine(DissolveToLevel());
                 }
-            //}
-            //else
-            //{
-            //    levelText.color = new Color32(255, 255, 255, 50);
-            //}
         }
+        else
+        {
+            levelText.color = new Color32(255, 255, 255, 50);
+        }
+    }
         else
         {
             levelText.text = null;
