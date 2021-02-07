@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public int health = 3;
     [Header("Player Movement")]
     [SerializeField] private float movementSpeed = 5f;
-    [SerializeField] private float jumpSpeed = 6f;
+    [SerializeField] private float jumpSpeed = 12f;
     private float jumpPressedDelay = 0f;
     private float jumpPressedDelayTime = 0.15f;
     [SerializeField] private float climbSpeed = 2f;
@@ -89,12 +89,17 @@ public class Player : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        movement.Normalize();
+        //movement.Normalize();
 
         jumpPressedDelay -= Time.deltaTime;
         if (Input.GetButtonDown("Jump"))
         {
             jumpPressedDelay = jumpPressedDelayTime;
+        }
+        //Reduce jump velocity after releasing button
+        if (Input.GetButtonUp("Jump") && rb2d.velocity.y > 0)
+        {
+            rb2d.velocity = new Vector2(0f, rb2d.velocity.y * 0.65f);
         }
     }
 
@@ -127,9 +132,10 @@ public class Player : MonoBehaviour
         if (jumpPressedDelay > 0)
         {
             jumpPressedDelay = 0;
-            Vector2 jumpVelocity = new Vector2(0f, jumpSpeed);
-            rb2d.velocity += jumpVelocity;
+            rb2d.velocity = new Vector2(0f, jumpSpeed);
+            
         }
+
     }
 
     void Climb()

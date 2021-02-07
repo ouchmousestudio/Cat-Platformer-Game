@@ -61,7 +61,7 @@ Material:
     - dissolveAmount: 0
     m_Colors:
     - Color_31F0B6BC: {r: 1.6, g: 0, b: 2.996078, a: 0}
-    - Color_92FBD12A: {r: 12.42353, g: 0, b: 23.968628, a: 0}
+    - Color_92FBD12A: {r: 0, g: 0.881089, b: 23.968628, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}

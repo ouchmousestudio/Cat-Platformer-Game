@@ -1,12 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
 public class LevelIcon : MonoBehaviour
 {
-
     [SerializeField] string sceneName;
     [SerializeField] int thisLevel;
     [SerializeField] TextMeshProUGUI levelText;
@@ -31,14 +29,16 @@ public class LevelIcon : MonoBehaviour
             //Enable Level counter
             if (thisLevel <= FindObjectOfType<GameSession>().levelNumber)
             {
+                //Show Level Text
                 levelText.text = sceneName;
                 levelText.color = new Color32(255, 255, 255, 200);
 
-                //Show Level Text
                 if (Input.GetButtonDown("Jump"))
                 {
-                    //SceneManager.LoadScene(sceneName);
                     FindObjectOfType<Dissolve>().DissolveOut();
+                    //TODO: Recent edit
+                    Vector2 playerPos = new Vector2(transform.position.x, transform.position.y + 0.25f);
+                    FindObjectOfType<GameSession>().lastLocation = playerPos;
                     StartCoroutine(DissolveToLevel());
                 }
         }

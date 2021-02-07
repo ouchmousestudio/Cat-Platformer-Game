@@ -26,6 +26,8 @@ public class GameSession : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
         }
+
+        levelNumber = PlayerPrefsController.GetLevelProgress();
     }
 
     public void ProcessPlayerDeath()
@@ -62,6 +64,9 @@ public class GameSession : MonoBehaviour
     public int ProgressLevel(int levelProgress)
     {
         levelNumber = levelProgress;
+
+        //Save data to PlayerPrefs
+        PlayerPrefsController.SetLevelProgress(levelNumber);
         return levelProgress;
     }
 

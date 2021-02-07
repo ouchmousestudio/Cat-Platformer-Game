@@ -11,6 +11,8 @@ public class WorldMap : MonoBehaviour
     [SerializeField] Transform movePoint;
 
     [SerializeField] LayerMask obstacle;
+    private Vector2 startingPos = new Vector2(-11.5f, 1.75f);
+    private Vector2 zeroPos = new Vector2(0f, 0f);
 
 
     // Start is called before the first frame update
@@ -21,8 +23,17 @@ public class WorldMap : MonoBehaviour
 
         if (levelNumber > 0)
         {
-            gameObject.transform.position = FindObjectOfType<GameSession>().lastLocation;
-            movePoint.position = FindObjectOfType<GameSession>().lastLocation;
+            if (FindObjectOfType<GameSession>().lastLocation == new Vector2(0,0))
+            {
+                gameObject.transform.position = startingPos;
+                movePoint.position = startingPos;
+            }
+            else
+            {
+                gameObject.transform.position = FindObjectOfType<GameSession>().lastLocation;
+                movePoint.position = FindObjectOfType<GameSession>().lastLocation;
+            }
+            
         }
         //Unparent the movepoint
         movePoint.parent = null;
@@ -56,13 +67,6 @@ public class WorldMap : MonoBehaviour
                 }
             }
         }
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            FindObjectOfType<GameSession>().lastLocation = gameObject.transform.position;
-
-        }
-
     }
 
 }
