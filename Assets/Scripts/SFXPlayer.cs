@@ -52,6 +52,21 @@ public class SFXPlayer : MonoBehaviour
         myAudioSource.PlayOneShot(deathSqueak, 1f);
     }
 
+    public void Footstep()
+    {
+        myAudioSource.PlayOneShot(sample[0], 0.3f);
+    }
+
+    public void Footstep2()
+    {
+        myAudioSource.PlayOneShot(sample[1], 0.3f);
+    }
+
+    public void DissolveSound()
+    {
+        myAudioSource.PlayOneShot(sample[2], 0.3f);
+    }
+
     public void PlaySFX(int sampleNum)
     {
         myAudioSource.PlayOneShot(sample[sampleNum], 1f);

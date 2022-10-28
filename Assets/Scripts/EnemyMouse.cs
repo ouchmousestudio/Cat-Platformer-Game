@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class EnemyMouse : MonoBehaviour
 {
-    [SerializeField] float movementSpeed = 1f;
-    [SerializeField] GameObject splatterParticles;
-    [SerializeField] float dyingTime = 0.3f;
-    [SerializeField] GameObject player;
+    [SerializeField] private float movementSpeed = 1f;
+    [SerializeField] private GameObject splatterParticles;
+    [SerializeField] private float dyingTime = 0.3f;
+    [SerializeField] private GameObject player;
 
-    Rigidbody2D myRigidbody;
-    CapsuleCollider2D myColliderMid;
-    CircleCollider2D myColliderTop;
-    Animator myAnimator;
+    private Rigidbody2D myRigidbody;
+    private CapsuleCollider2D myColliderMid;
+    private CircleCollider2D myColliderTop;
+    private Animator myAnimator;
 
-    bool enemyIsAlive = true;
-    bool enemyIsAttacking = false;
+    private bool enemyIsAlive = true;
+    private bool enemyIsAttacking = false;
 
     void Start()
     {

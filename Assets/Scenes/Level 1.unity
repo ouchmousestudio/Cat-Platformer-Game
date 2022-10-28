@@ -690,7 +690,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 336259450}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.1800003, y: -1.3659999, z: -10}
+  m_LocalPosition: {x: -5.1800003, y: -1.4, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2075960187}
@@ -3689,7 +3689,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.1800003, y: -1.3659999, z: -10}
+  m_LocalPosition: {x: -5.1800003, y: -1.4, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1193233366}
@@ -4102,6 +4102,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3850675266747195698, guid: 2bad760793eb945b49029cde526803bd,
+        type: 3}
+      propertyPath: sample.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3850675266747195698, guid: 2bad760793eb945b49029cde526803bd,
+        type: 3}
+      propertyPath: sample.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 40f32fa801f6f4a70ab6b047fa28bfc1, type: 3}
+    - target: {fileID: 3850675266747195698, guid: 2bad760793eb945b49029cde526803bd,
+        type: 3}
+      propertyPath: sample.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 06e39bae3dd73441f8c7d50cb1f0278a, type: 3}
+    - target: {fileID: 3850675266747195698, guid: 2bad760793eb945b49029cde526803bd,
+        type: 3}
+      propertyPath: sample.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 85f74892c69754589b5cd13e07376cae, type: 3}
     - target: {fileID: 7396695565357352418, guid: 2bad760793eb945b49029cde526803bd,
         type: 3}
       propertyPath: m_Name
@@ -4195,6 +4215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   openDoor: {fileID: 8985501}
   levelNumber: 1
+  isLastLevel: 0
 --- !u!19719996 &1198995449
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -5979,7 +6000,7 @@ PrefabInstance:
     - target: {fileID: 9203353957944293125, guid: d4d4e050f980b4ac195e5d90cf4c0d83,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.3659999
+      value: -1.4
       objectReference: {fileID: 0}
     - target: {fileID: 9203353957944293125, guid: d4d4e050f980b4ac195e5d90cf4c0d83,
         type: 3}
@@ -6019,11 +6040,6 @@ PrefabInstance:
     - target: {fileID: 9203353957944293125, guid: d4d4e050f980b4ac195e5d90cf4c0d83,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9203353957944293131, guid: d4d4e050f980b4ac195e5d90cf4c0d83,
-        type: 3}
-      propertyPath: m_Interpolate
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

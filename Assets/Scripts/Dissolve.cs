@@ -5,12 +5,11 @@ using UnityEngine;
 public class Dissolve : MonoBehaviour
 {
 
-    [SerializeField] Material myMaterial;
+    [SerializeField] private Material myMaterial;
+    [SerializeField] private float dissolveSpeed = 1f;
 
     private bool isDissolving = true;
-
     private float dissolveAmount = 0f;
-    [SerializeField] float dissolveSpeed = 1f;
 
     private void Update()
     {
@@ -25,7 +24,6 @@ public class Dissolve : MonoBehaviour
             myMaterial.SetFloat("_Amount", dissolveAmount);
         }
     }
-
    
     public void DissolveIn()
     {

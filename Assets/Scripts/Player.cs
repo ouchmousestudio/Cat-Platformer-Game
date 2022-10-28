@@ -12,11 +12,11 @@ public class Player : MonoBehaviour
     private float jumpPressedDelay = 0f;
     private float jumpPressedDelayTime = 0.15f;
     [SerializeField] private float climbSpeed = 2f;
+
     //For damage knockback effect
     [Header("Player Knockback")]
-    [SerializeField] private float damageDelay = 1f;
-    [SerializeField] private float knockback = 5f;
-
+    public float damageDelay = 1f;
+    public float knockback = 5f;
     public float knockbackLength = 0.2f;
     public float knockbackCount = 0f;
     public bool knockbackFromRight;
@@ -26,6 +26,10 @@ public class Player : MonoBehaviour
     //Bool states
     private bool isAlive = true;
     private bool isImmune = false;
+    private bool hasJumped = false;
+    private bool isGrounded = true;
+    private bool wasGrounded = true;
+    private bool canPlaySound = false;
 
     private Rigidbody2D rb2d;
     private Animator myAnimator;
@@ -35,7 +39,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        //Cached component refernces
+        //Cached component references
         rb2d = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         myColliderFeet = GetComponent<PolygonCollider2D>();
@@ -44,14 +48,14 @@ public class Player : MonoBehaviour
 
         //Dissolve at start of level
         FindObjectOfType<Dissolve>().DissolveIn();
+
+        //Prevent footstep at start
+        Invoke(nameof(CanPlaySound), 1f);
     }
 
     void Update()
     {
-        if (!isAlive)
-        {
-            return;
-        }
+        if (!isAlive) { return; }
         GetInput();
         WaterDeath();
     }
@@ -75,6 +79,11 @@ public class Player : MonoBehaviour
                 rb2d.velocity = new Vector2(knockback, knockback);
             knockbackCount -= Time.deltaTime;
         }
+    }
+
+    void CanPlaySound()
+    {
+        canPlaySound = true;
     }
 
     void Walk()
@@ -120,21 +129,29 @@ public class Player : MonoBehaviour
         //Play jump animation for jump, or for falling
         if (!myColliderFeet.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
+            isGrounded = false;
             myAnimator.SetBool("Jumping", true);
-            return;
         }
         else
         {
+            isGrounded = true;
             myAnimator.SetBool("Jumping", false);
+
+            //Jump delay to allow jumping just before landing
+            if (jumpPressedDelay > 0)
+            {
+                jumpPressedDelay = 0;
+                rb2d.velocity = new Vector2(0f, jumpSpeed);
+            }
         }
 
-        //Jump delay to allow jumping just before landing
-        if (jumpPressedDelay > 0)
+        //Check for Landing
+        if (isGrounded && !wasGrounded && canPlaySound)
         {
-            jumpPressedDelay = 0;
-            rb2d.velocity = new Vector2(0f, jumpSpeed);
-            
+            FindObjectOfType<SFXPlayer>().Footstep2();
         }
+
+        wasGrounded = isGrounded;
 
     }
 
@@ -160,7 +177,7 @@ public class Player : MonoBehaviour
     //When Player Takes Damage
     public void TakeDamage()
     {
-        if(!isAlive)
+        if (!isAlive)
         { return; }
         if (health >= 1)
         {
@@ -182,7 +199,7 @@ public class Player : MonoBehaviour
             isImmune = true;
             health--;
             FindObjectOfType<SFXPlayer>().DamageMeow();
-            FindObjectOfType<UIController>().UpdateHealth();  
+            FindObjectOfType<UIController>().UpdateHealth();
         }
         yield return new WaitForSecondsRealtime(damageDelay);
         isImmune = false;
@@ -214,6 +231,15 @@ public class Player : MonoBehaviour
             knockbackFromRight = true;
         else
             knockbackFromRight = false;
+    }
+
+    void PlayFootstep()
+    {
+        FindObjectOfType<SFXPlayer>().Footstep();
+    }
+    void PlayFootstep2()
+    {
+        FindObjectOfType<SFXPlayer>().Footstep2();
     }
 
 }
